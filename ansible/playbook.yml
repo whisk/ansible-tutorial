@@ -1,14 +1,17 @@
 - hosts: all
   user: root
   tasks:
-  # install nginx
+  # install packages
+  - apt: update_cache=yes
+  - apt: name=ntp
   - apt: name=nginx
+  - apt: name=git
+  # prepare nginx configs for site
   - copy:
       src: files/nginx_site.conf
       dest: /etc/nginx/sites-enabled/
   # prepare site code
   - file: path=/var/www/ansible-site state=directory
-  - apt: name=git
   - git: repo=https://github.com/whisk/ansible-tutorial dest=/root/ansible-tutorial depth=1
   - shell: rsync -ru --delete /root/ansible-tutorial/www/ /var/www/ansible-site/
   # restart nginx

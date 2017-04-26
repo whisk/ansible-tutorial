@@ -1,3 +1,7 @@
 [webservers]
 web1 ansible_host=192.168.56.211 num_cpus=4
 web2 ansible_host=192.168.56.212 num_cpus=8
+
+[all:vars]
+ansible_user=root
+http_port=8888

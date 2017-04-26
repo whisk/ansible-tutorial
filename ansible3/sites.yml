@@ -1,0 +1,16 @@
+- hosts: all
+  vars:
+    sites:
+      - name: foo.com
+        dir: /var/www/foo_com
+      - name: bar.com
+        dir: /var/www/bar_com
+      - name: foobar.com
+        dir: /var/www/foobar_com
+
+  tasks:
+  - file: name={{item.dir}} state=directory
+    with_items: "{{sites}}"
+  - template:
+      src: templates/nginx_sites.conf
+      dest: /etc/nginx/sites-enabled/

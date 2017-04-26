@@ -1,0 +1,6 @@
+- hosts: all
+  user: root
+  tasks:
+  - template:
+      src: templates/nginx.conf
+      dest: /etc/nginx/

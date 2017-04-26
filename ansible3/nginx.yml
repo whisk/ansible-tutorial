@@ -1,0 +1,7 @@
+- hosts: all
+  user: root
+  tasks:
+  - apt: name=nginx
+  - template:
+      src: templates/nginx.conf
+      dest: /etc/nginx/

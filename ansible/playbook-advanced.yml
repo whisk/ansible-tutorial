@@ -1,0 +1,28 @@
+- hosts: all
+  user: root
+  tasks:
+  - block:
+    - name: update cache
+      apt: update_cache=yes
+    - name: install packages
+      apt: name={{item}}
+      with_items:
+      - ntp
+      - nginx
+      - git
+    ignore_errors: yes
+    tags: packages
+
+  - name: prepare nginx configs for site
+    copy:
+      src: files/nginx_site.conf
+      dest: /etc/nginx/sites-enabled/
+    notify: restart nginx
+    tags: configs
+
+  - include: deploy-site.yml
+    tags: deploy
+
+  handlers:
+  - name: restart nginx
+    service: name=nginx state=restarted
