@@ -13,7 +13,12 @@ vagrant up
 
 This will bring up three nodes to play with Ansible.
 
-2. Install [Ansible](http://docs.ansible.com/ansible/intro_installation.html)
+2. Put your **public** SSH key to `vagrant/my.keys`:
+```
+cat ~/.ssh/id_rsa.pub > vagrant/my.keys
+```
+
+3. Install [Ansible](http://docs.ansible.com/ansible/intro_installation.html)
 
 ## Contents
 

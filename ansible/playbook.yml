@@ -13,6 +13,6 @@
   # prepare site code
   - file: path=/var/www/ansible state=directory
   - git: repo=https://github.com/whisk/ansible-tutorial dest=/root/ansible-tutorial depth=1
-  - shell: rsync -ru --delete /root/ansible-tutorial/www/ansible /var/www/ansible/
+  - shell: rsync -ru --delete /root/ansible-tutorial/www/ansible/ /var/www/ansible/
   # restart nginx
   - service: name=nginx state=restarted enabled=yes
