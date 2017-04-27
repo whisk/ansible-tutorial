@@ -9,8 +9,18 @@
         dir: /var/www/foobar_com
 
   tasks:
-  - file: name={{item.dir}} state=directory
-    with_items: "{{sites}}"
-  - template:
-      src: templates/nginx_sites.conf
-      dest: /etc/nginx/sites-enabled/
+    - apt: name=nginx
+    - template:
+        src: templates/nginx.conf
+        dest: /etc/nginx/
+    - file: name={{item.dir}} state=directory
+      with_items: "{{sites}}"
+    - synchronize:
+        src: ../www/{{item.dir|basename}}/
+        dest: "{{item.dir}}/"
+        delete: yes
+      with_items: "{{sites}}"
+    - template:
+        src: templates/nginx_sites.conf
+        dest: /etc/nginx/sites-enabled/
+    - service: name=nginx state=reloaded

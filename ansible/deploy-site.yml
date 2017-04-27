@@ -1,5 +1,5 @@
-- file: path=/var/www/ansible-site state=directory
+- file: path=/var/www/ansible state=directory
 - name: update repo
   git: repo=https://github.com/whisk/ansible-tutorial dest=/root/ansible-tutorial depth=1
 - name: copy site files
-  shell: rsync -ru --delete /root/ansible-tutorial/www/ /var/www/ansible-site/
+  shell: rsync -ru --delete /root/ansible-tutorial/www/ansible/ /var/www/ansible/
