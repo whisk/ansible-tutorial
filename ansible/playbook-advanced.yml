@@ -2,17 +2,10 @@
   user: root
   tasks:
   - block:
-    - name: update cache
-      apt: update_cache=yes
-    - name: install packages
+    - name: install packages update_cache=yes cache_valid_time=86400
       apt: name={{item}}
-      with_items:
-      - ntp
-      - nginx
-      - git
-    ignore_errors: yes
+      with_items: [ntp, nginx, git]
     tags: packages
-
   - name: prepare nginx configs for site
     copy:
       src: files/nginx_site.conf

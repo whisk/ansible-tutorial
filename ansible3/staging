@@ -1,5 +1,5 @@
 [webservers]
-web0 ansible_host=192.168.56.210 num_cpus=1
+web0 ansible_host=192.168.56.210 cpus=1
 
 [all:vars]
 ansible_user=root
